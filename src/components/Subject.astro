@@ -1,0 +1,15 @@
+<style>
+  h1 {
+    grid-row: 1 / span calc(sibling-count() - 1);
+  }
+  span {
+    position: sticky;
+    top: var(--space);
+  }
+</style>
+
+<h1>
+  <span>
+    <slot />
+  </span>
+</h1>

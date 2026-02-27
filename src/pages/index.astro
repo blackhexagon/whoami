@@ -1,21 +1,71 @@
 ---
-
+import Subject from "../components/Subject.astro";
+import Predicate from "../components/Predicate.astro";
+import Modifier from "../components/Modifier.astro";
+import config from "../../config.ts";
 ---
-<style>
-h1 {
-  text-align: center;
-}
+
+<style is:global>
+  html {
+    scroll-snap-type: y mandatory;
+    font-family: sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    --space: 2rem;
+    --column: 200px;
+  }
+
+  body {
+    padding-inline: calc(50vw - 600px);
+    padding-block: var(--space);
+    scrollbar-width: thin;
+    scrollbar-color: pink;
+  }
+
+  main {
+    display: grid;
+    gap: var(--space);
+    padding: var(--space);
+    grid-template-columns: var(--column) minmax(0, 1fr);
+    grid-template-areas: "subject predicate";
+  }
+
+  footer {
+    height: 100dvh;
+    scroll-snap-align: start;
+  }
 </style>
+
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-    <title>Matouš Trča</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{config.name}</title>
+  </head>
+  <body>
+    <main>
+      <Subject>
+        {config.name}
+      </Subject>
+      {
+        config.predicates.map(([predicate, modifiers]) => (
+          <Predicate title={predicate}>
+            <div>
+              {modifiers.map((modifier) => (
+                <Modifier title={modifier} />
+              ))}
+            </div>
+          </Predicate>
+        ))
+      }
+    </main>
+    <footer>matous.trca@gmail.com</footer>
+  </body>
 </html>

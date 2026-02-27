@@ -1,0 +1,29 @@
+---
+const { title } = Astro.props;
+---
+
+<style>
+  section {
+    height: calc(100dvh - 8rem);
+    display: grid;
+    grid-template-columns: var(--column) minmax(0, 1fr);
+    grid-column: predicate;
+    gap: 2rem;
+    scroll-snap-align: start;
+    background: whitesmoke;
+    border-radius: 3rem;
+    padding: 3rem;
+  }
+
+  span {
+    position: sticky;
+    top: 0;
+  }
+</style>
+
+<section>
+  <h2>
+    <span>{title}</span>
+  </h2>
+  <slot />
+</section>
