@@ -7,7 +7,7 @@ export default {
     ["manžel", ["lásky mého života"]],
     ["fanoušek", ["hudby", "filmu"]],
     ["čtenář", ["Respektu", "hacker news", "RSS"]],
-    ["tělem", ["cyklista", "běžec", "plavec"]],
+    ["tělem", ["cyklista", "běžec", "plavec", "otužilec", "pilatér" ]],
     ["duší", ["buddhista","liberál", "abstinent"],
     ["absolvent", ["Univerzity Karlovy", "SPŠ Tábor"]],
     ["promotér", ["táborských parties"]],
