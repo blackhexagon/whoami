@@ -4,20 +4,17 @@ const { title } = Astro.props;
 
 <style>
   section {
-    height: calc(100dvh - 8rem);
     display: grid;
+    padding: var(--space);
     grid-template-columns: var(--column) minmax(0, 1fr);
     grid-column: predicate;
     gap: 2rem;
-    scroll-snap-align: start;
     background: whitesmoke;
-    border-radius: 3rem;
-    padding: 3rem;
   }
 
   span {
     position: sticky;
-    top: 0;
+    top: var(--space);
   }
 </style>
 

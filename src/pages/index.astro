@@ -6,9 +6,30 @@ import config from "../../config.ts";
 ---
 
 <style is:global>
+  @property --progress {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 0deg;
+  }
+
+  @font-face {
+    font-family: "GogaMono";
+    src: url("/trial/GogaMono/Goga-Mono-Bold-TRIAL.otf") format("otf");
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --color: oklch(50% 50% var(--progress));
+  }
+
   html {
     scroll-snap-type: y mandatory;
-    font-family: sans-serif;
+    animation: progress;
+    animation-timeline: scroll();
+    font-family: "GogaMono", sans-serif;
+    scrollbar-color: white var(--color);
   }
 
   * {
@@ -21,15 +42,14 @@ import config from "../../config.ts";
 
   body {
     padding-inline: calc(50vw - 600px);
-    padding-block: var(--space);
-    scrollbar-width: thin;
-    scrollbar-color: pink;
+    accent-color: var(--color);
+    color: var(--color);
+    background: var(--color);
   }
 
   main {
     display: grid;
     gap: var(--space);
-    padding: var(--space);
     grid-template-columns: var(--column) minmax(0, 1fr);
     grid-template-areas: "subject predicate";
   }
@@ -37,6 +57,15 @@ import config from "../../config.ts";
   footer {
     height: 100dvh;
     scroll-snap-align: start;
+  }
+
+  @keyframes progress {
+    from {
+      --progress: 0deg;
+    }
+    to {
+      --progress: 360deg;
+    }
   }
 </style>
 

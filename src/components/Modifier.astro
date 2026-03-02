@@ -4,6 +4,14 @@ const { title } = Astro.props;
 
 <style>
   article {
+    height: calc(100dvh - 8rem);
+    scroll-snap-align: start;
+    background: lightgrey;
+    padding: var(--space);
+  }
+  h3 {
+    position: sticky;
+    top: var(--space);
   }
 </style>
 
