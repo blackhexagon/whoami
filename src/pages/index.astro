@@ -13,8 +13,8 @@ import config from "../../config.ts";
   }
 
   @font-face {
-    font-family: "GogaMono";
-    src: url("/trial/GogaMono/Goga-Mono-Bold-TRIAL.otf") format("otf");
+    font-family: "Goga";
+    src: url("/trial/Goga/Goga-Bold-TRIAL.otf") format("opentype");
     font-weight: bold;
     font-style: normal;
     font-display: swap;
@@ -28,7 +28,7 @@ import config from "../../config.ts";
     scroll-snap-type: y mandatory;
     animation: progress;
     animation-timeline: scroll();
-    font-family: "GogaMono", sans-serif;
+    font-family: "Goga", sans-serif;
     scrollbar-color: white var(--color);
   }
 
@@ -43,8 +43,8 @@ import config from "../../config.ts";
   body {
     padding-inline: calc(50vw - 600px);
     accent-color: var(--color);
-    color: var(--color);
     background: var(--color);
+    color: white;
   }
 
   main {
@@ -61,10 +61,10 @@ import config from "../../config.ts";
 
   @keyframes progress {
     from {
-      --progress: 0deg;
+      --progress: 240deg;
     }
     to {
-      --progress: 360deg;
+      --progress: 300deg;
     }
   }
 </style>
@@ -72,8 +72,11 @@ import config from "../../config.ts";
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <link
+      type="image/svg+xml"
+      rel="shortcut icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'><circle cx='5' cy='5' r='5' fill='var(--color)' /></svg>"
+    />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{config.name}</title>
