@@ -4,22 +4,57 @@ const { title } = Astro.props;
 
 <style>
   article {
-    height: calc(100dvh - 8rem);
-    scroll-snap-align: start;
-    background: oklch(20% 50% var(--progress));
     color: white;
-    padding: var(--space);
-    border-radius: var(--space);
-    margin-top: var(--space);
+    padding-left: var(--space);
+    transition: opacity 500ms;
+    grid-column: 2 / 3;
+    scroll-snap-align: start;
+    height: calc(50dvh - 8rem);
+    container-type: scroll-state;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  article::scroll-marker {
+    content: "";
+    height: 100%;
+    width: 100%;
+    grid-column: modifiers;
+    --bg: black;
+    border-right: 2px solid var(--bg);
+  }
+
+  article::scroll-marker:hover,
+  article::scroll-marker:target-current {
+    --bg: white;
+    color: white;
   }
 
   h3 {
     position: sticky;
     top: var(--space);
+
+    @container not scroll-state(snapped: y) {
+      opacity: 0.25;
+      transition: opacity 500ms;
+    }
+  }
+  div {
+    font-size: 8px;
+    width: 60ch;
+    @container not scroll-state(snapped: y) {
+      opacity: 0.25;
+      transition: opacity 500ms;
+    }
+    /* display: grid; */
+    /* grid-template-rows: repeat(60, 1ch); */
+    /* grid-template-columns: repeat(60, 1ch); */
   }
 </style>
 
 <article>
   <h3>{title}</h3>
+  <div></div>
   <slot />
 </article>

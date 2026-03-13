@@ -1,18 +1,29 @@
+---
+import config from "../../config";
+---
+
 <style>
-  h1 {
+  header {
     grid-row: 1 / span calc(sibling-count() - 1);
-    color: white;
+    text-align: right;
   }
-  span {
+
+  h1 {
     position: sticky;
     top: 0;
-    display: block;
     padding-block: var(--space);
+  }
+
+  p {
+    position: sticky;
+    top: calc(100dvh - var(--space));
+    anchor-name: --subject;
   }
 </style>
 
-<h1>
-  <span>
-    <slot />
-  </span>
-</h1>
+<header>
+  <h1>
+    {config.name}
+  </h1>
+  <p>matous@trca.dev</p>
+</header>

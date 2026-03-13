@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "whoami",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -16,3 +16,4 @@
     "prettier-plugin-astro": "0.14.1"
   }
 }
+

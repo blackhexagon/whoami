@@ -1,27 +1,67 @@
 ---
-const { title } = Astro.props;
+import Modifier from "../components/Modifier.astro";
+
+interface Props {
+  title: string;
+  modifiers: string[];
+  index: number;
+}
+const { title, index, modifiers } = Astro.props;
 ---
 
 <style>
   section {
     display: grid;
-    padding: var(--space);
+    padding-left: var(--space);
     grid-template-columns: var(--column) minmax(0, 1fr);
     grid-column: predicate;
-    border-radius: var(--space);
-    gap: var(--space);
-    background: whitesmoke;
+    gap: 0 var(--space);
+    scroll-snap-align: start;
+  }
+
+  section::scroll-marker {
+    content: "";
+    height: 100%;
+    width: 100%;
+    grid-column: predicates;
+    grid-row: span attr(data-children type(<number>));
+    text-decoration: none;
+    --bg: black;
+    border-left: 2px solid var(--bg);
+  }
+
+  section::scroll-marker:hover,
+  section::scroll-marker:target-current {
+    --bg: white;
+  }
+
+  hgroup {
+    grid-row: 1 / calc(sibling-count());
+    text-align: center;
+  }
+
+  h2 {
+    position: sticky;
+    top: var(--space);
+    container-type: scroll-state;
   }
 
   span {
-    position: sticky;
-    top: var(--space);
+    @container not scroll-state(stuck: top) {
+      opacity: 0.25;
+      transition: opacity 500ms;
+    }
   }
 </style>
 
-<section>
-  <h2>
-    <span>{title}</span>
-  </h2>
-  <slot />
+<section data-title={title} data-children={modifiers.length}>
+  <hgroup>
+    <h2>
+      <span>
+        {title}
+      </span>
+    </h2>
+  </hgroup>
+  <div style="height: 100dvh"></div>
+  {modifiers.map((modifier) => <Modifier title={modifier} />)}
 </section>

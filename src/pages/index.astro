@@ -1,47 +1,61 @@
 ---
 import Subject from "../components/Subject.astro";
 import Predicate from "../components/Predicate.astro";
-import Modifier from "../components/Modifier.astro";
+import ModifierGroup from "../components/ModifierGroup.astro";
 import config from "../../config.ts";
 ---
 
 <style is:global>
   @property --progress {
-    syntax: "<angle>";
+    syntax: "<percentage>";
     inherits: true;
-    initial-value: 0deg;
+    initial-value: 0%;
   }
 
   @font-face {
     font-family: "Goga";
-    src: url("/trial/Goga/Goga-Bold-TRIAL.otf") format("opentype");
+    src: url("/trial/GogaMono/Goga-Mono-Black-TRIAL.otf") format("opentype");
     font-weight: bold;
     font-style: normal;
     font-display: swap;
   }
 
   :root {
-    --color: oklch(50% 50% var(--progress));
+    --color: oklch(var(--progress) 50% 240deg);
+    --space: 2rem;
+    --column: 200px;
   }
 
   html {
-    scroll-snap-type: y mandatory;
     animation: progress;
     animation-timeline: scroll();
     font-family: "Goga", sans-serif;
     scrollbar-color: white var(--color);
+    scroll-snap-type: y mandatory;
+    scroll-marker-group: after;
+    scroll-behavior: smooth;
+  }
+
+  ::scroll-marker-group {
+    display: grid;
+    grid-template-columns: repeat(2, calc(var(--column) / 2) + var(--space));
+    grid-template-areas: "predicates modifiers";
+    position-anchor: --subject;
+    position: absolute;
+    bottom: anchor(bottom);
+    left: calc(anchor(right) + var(--space));
+    height: calc(100dvh - var(--space));
+    width: calc(var(--column) + 2 * var(--space));
   }
 
   * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    --space: 2rem;
-    --column: 200px;
   }
 
   body {
-    padding-inline: calc(50vw - 600px);
+    padding: 0 0 0 calc(32vw - var(--column));
     accent-color: var(--color);
     background: var(--color);
     color: white;
@@ -49,9 +63,10 @@ import config from "../../config.ts";
 
   main {
     display: grid;
-    gap: var(--space);
+    gap: 0 var(--space);
     grid-template-columns: var(--column) minmax(0, 1fr);
     grid-template-areas: "subject predicate";
+    anchor-name: --main;
   }
 
   footer {
@@ -61,10 +76,10 @@ import config from "../../config.ts";
 
   @keyframes progress {
     from {
-      --progress: 240deg;
+      --progress: 50%;
     }
     to {
-      --progress: 300deg;
+      --progress: 0%;
     }
   }
 </style>
@@ -75,7 +90,7 @@ import config from "../../config.ts";
     <link
       type="image/svg+xml"
       rel="shortcut icon"
-      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'><circle cx='5' cy='5' r='5' fill='var(--color)' /></svg>"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'><circle cx='5' cy='5' r='5' /></svg>"
     />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
@@ -83,18 +98,14 @@ import config from "../../config.ts";
   </head>
   <body>
     <main>
-      <Subject>
-        {config.name}
-      </Subject>
+      <Subject />
       {
-        config.predicates.map(([predicate, modifiers]) => (
-          <Predicate title={predicate}>
-            <div>
-              {modifiers.map((modifier) => (
-                <Modifier title={modifier} />
-              ))}
-            </div>
-          </Predicate>
+        config.predicates.map(([predicate, modifiers], index) => (
+          <Predicate
+            title={predicate as string}
+            index={index}
+            modifiers={modifiers as string[]}
+          />
         ))
       }
     </main>

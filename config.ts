@@ -1,9 +1,18 @@
 export default {
   name: "Matouš Trča",
   predicates: [
-    ["full-stack vývojář", ["TypeScript", "PHP", "HTML & CSS", "docker"]],
+    [
+      "full-stack vývojář",
+      [
+        "S webem si hraju už od základní školy. Občas mě vítr zavál ke grafice, jindy zas k back-endu. Front-end mě ale baví nejvíc.",
+        "TypeScript",
+        "PHP",
+        "HTML & CSS",
+        "docker",
+      ],
+    ],
     ["uživatel", ["Linuxu", "neovimu", "split keyboardu", "Anki"]],
-    ["hrdý táta", ["dvou dcer"]],
+    ["hrdý táta", ["Josefínky", "Toničky"]],
     ["manžel", ["lásky mého života"]],
     ["fanoušek", ["hudby", "filmu"]],
     ["čtenář", ["Respektu", "hacker news", "RSS"]],

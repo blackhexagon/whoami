@@ -1,0 +1,12 @@
+---
+import Modifier from "../components/Modifier.astro";
+
+interface Props {
+  items: string[];
+  index: number;
+}
+
+const { items } = Astro.props;
+---
+
+{items.map((modifier) => <Modifier title={modifier} />)}
